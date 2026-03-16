@@ -53,3 +53,5 @@ This is a Streamlit-based number guessing game where the player picks a difficul
 
 ## 🚀 Stretch Features
 
+<img src="./assets/tests.png" />
+<img src="./assets/hint.png" />
