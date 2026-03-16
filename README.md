@@ -25,14 +25,31 @@ It wrote the code, ran away, and now the game is unplayable.
 
 ## 📝 Document Your Experience
 
-- [ ] Describe the game's purpose.
-- [ ] Detail which bugs you found.
-- [ ] Explain what fixes you applied.
+### Game Purpose
+This is a Streamlit-based number guessing game where the player picks a difficulty (Easy, Normal, or Hard), then tries to guess a secret number within a limited number of attempts. After each guess the game gives a "Too High" or "Too Low" hint to guide the player toward the answer.
+
+### Bugs Found
+1. **Reversed hint messages** — When the guess was higher than the secret, the game said "Go HIGHER!" instead of "Go LOWER!" (and vice versa).
+2. **Type coercion bug** — On even-numbered attempts, the secret was converted to a string before comparison, causing incorrect or broken hint logic.
+3. **Hard difficulty range was wrong** — Hard mode used a range of 1–50, which was actually easier than Normal (1–100).
+4. **Hardcoded range display** — The info text always said "between 1 and 100" regardless of the selected difficulty.
+5. **Score calculation off-by-one** — The win score formula used `attempt_number + 1`, over-penalizing the player.
+6. **Inconsistent score penalty** — "Too High" guesses sometimes added 5 points and sometimes subtracted 5, depending on attempt parity.
+7. **New Game reset bug** — Clicking "New Game" reset attempts to 0 instead of 1, didn't clear score/history/status, and always used range 1–100.
+
+### Fixes Applied
+- Refactored all game logic (`check_guess`, `parse_guess`, `get_range_for_difficulty`, `update_score`) from `app.py` into `logic_utils.py` with corrected implementations.
+- Swapped the hint messages so "Too High" says "Go LOWER!" and "Too Low" says "Go HIGHER!".
+- Removed the string coercion of the secret number on even attempts.
+- Changed Hard mode range to 1–200.
+- Made the info text display the actual difficulty range dynamically.
+- Fixed the score formula and made penalties consistent.
+- Fixed the "New Game" button to properly reset all session state.
 
 ## 📸 Demo
 
-- [ ] [Insert a screenshot of your fixed, winning game here]
+
+<img src="./assets/win.png" />
 
 ## 🚀 Stretch Features
 
-- [ ] [If you choose to complete Challenge 4, insert a screenshot of your Enhanced Game UI here]
